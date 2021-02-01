@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { switchTabs } from "../actions/togglePageActions";
 
-export default class Topbar extends Component {
+class Topbar extends Component {
     render() {
         const navLinks = [
             {
@@ -22,10 +24,21 @@ export default class Topbar extends Component {
                             My Notes
                         </Link>
                         <div>
+                            <Link to="/" className="navbar-brand">
+                                <span
+                                    onClick={() =>
+                                        this.props.dispatch(switchTabs())
+                                    }
+                                >
+                                    {this.props.currentTab === "notes"
+                                        ? "ToDo"
+                                        : "Notes"}
+                                </span>
+                            </Link>
                             {navLinks.map((link) => {
                                 return (
                                     <Link
-                                        id={link.title}
+                                        key={link.title}
                                         className="navbar-brand"
                                         to={link.path}
                                     >
@@ -40,3 +53,9 @@ export default class Topbar extends Component {
         );
     }
 }
+
+export default connect((state) => {
+    return {
+        currentTab: state.toggleTab.tab,
+    };
+})(Topbar);
