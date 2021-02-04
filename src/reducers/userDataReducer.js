@@ -1,0 +1,23 @@
+const initialState = {
+    notesList: [],
+    todoList: [],
+};
+
+export const userDataReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "ADD_TODO":
+            return {
+                ...state,
+                todoList: [...state.todoList, action.payload.todoItem],
+            };
+
+        case "ADD_NOTE":
+            return {
+                ...state,
+                notesList: [...state.notesList, action.payload.noteItem],
+            };
+
+        default:
+            return state;
+    }
+};

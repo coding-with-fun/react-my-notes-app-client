@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { toggleReducer } from "./togglePageReducer";
+import { togglePageReducer } from "./togglePageReducer";
 
 const rootReducer = combineReducers({
-    toggleTab: toggleReducer,
+    toggleTab: togglePageReducer,
 });
 
 export default rootReducer;
