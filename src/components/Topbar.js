@@ -7,10 +7,6 @@ class Topbar extends Component {
     render() {
         const navLinks = [
             {
-                title: "Home",
-                path: "/",
-            },
-            {
                 title: "About",
                 path: "/about",
             },
@@ -24,16 +20,16 @@ class Topbar extends Component {
                             My Notes
                         </Link>
                         <div>
-                            <Link to="/" className="navbar-brand">
-                                <span
-                                    onClick={() =>
-                                        this.props.dispatch(switchTabs())
-                                    }
-                                >
-                                    {this.props.currentTab === "notes"
-                                        ? "ToDo"
-                                        : "Notes"}
-                                </span>
+                            <Link
+                                to="/"
+                                className="navbar-brand"
+                                onClick={() =>
+                                    this.props.dispatch(switchTabs())
+                                }
+                            >
+                                {this.props.currentTab === "notes"
+                                    ? "ToDo"
+                                    : "Notes"}
                             </Link>
                             {navLinks.map((link) => {
                                 return (

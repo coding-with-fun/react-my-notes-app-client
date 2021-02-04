@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Notes from "../Notes";
+import ToDo from "../ToDo";
 
-export default class index extends Component {
+class index extends Component {
     render() {
-        return (
-            <div>
-                Home Page
-            </div>
-        )
+        return this.props.currentTab === "notes" ? <Notes /> : <ToDo />;
     }
 }
+export default connect((state) => {
+    return {
+        currentTab: state.toggleTab.tab,
+    };
+})(index);
