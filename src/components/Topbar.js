@@ -1,23 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { switchTabs } from "../actions/togglePageActions";
 
 class Topbar extends Component {
     render() {
-        const navLinks = [
-            {
-                title: "About",
-                path: "/about",
-            },
-        ];
-
         return (
             <div>
                 <nav className="navbar navbar-light bg-light">
                     <div className="container-fluid">
                         <Link to="/" className="navbar-brand">
-                            My Notes
+                            My{" "}
+                            {this.props.currentTab === "notes"
+                                ? "Notes"
+                                : "ToDo"}
                         </Link>
                         <div>
                             <Link
@@ -31,17 +27,18 @@ class Topbar extends Component {
                                     ? "ToDo"
                                     : "Notes"}
                             </Link>
-                            {navLinks.map((link) => {
-                                return (
-                                    <Link
-                                        key={link.title}
-                                        className="navbar-brand"
-                                        to={link.path}
-                                    >
-                                        {link.title}
+
+                            {this.props.location.pathname !== "/about" ? (
+                                <Link className="navbar-brand" to={"/about"}>
+                                    About
+                                </Link>
+                            ) : (
+                                this.props.location.pathname !== "/" && (
+                                    <Link className="navbar-brand" to={"/"}>
+                                        Home
                                     </Link>
-                                );
-                            })}
+                                )
+                            )}
                         </div>
                     </div>
                 </nav>
@@ -54,4 +51,4 @@ export default connect((state) => {
     return {
         currentTab: state.toggleTab.tab,
     };
-})(Topbar);
+})(withRouter(Topbar));
