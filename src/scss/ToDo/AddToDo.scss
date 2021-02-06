@@ -1,13 +1,26 @@
 .add_todo__container {
+    span {
+        font-size: 30px;
+        color: var(--bs-primary);
+        cursor: pointer;
+    }
+
     .header {
         display: flex;
         justify-content: flex-end;
 
-        span {
-            font-size: 30px;
-            color: var(--bs-primary);
+        .add_todo_icon {
             margin: 10px;
-            cursor: pointer;
+        }
+
+        .add_todo_input__container {
+            display: flex;
+            margin: 10px;
+            width: 40%;
+
+            .close_add_todo_icon {
+                margin-left: 10px;
+            }
         }
     }
 }
