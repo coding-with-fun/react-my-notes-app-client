@@ -1,15 +1,26 @@
-import axios from "axios";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { loadTodoItems } from "../../actions/userDataActions";
-import AddTodo from "./AddTodo";
+import axios from 'axios';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loadTodoItems } from '../../actions/userDataActions';
+import AddTodo from './AddTodo';
+import ToDoList from './ToDoList';
 
 class index extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoaded: false,
+        };
+    }
+
     loadTodoItems = () => {
         axios
-            .get("https://jsonplaceholder.typicode.com/todos")
+            .get('https://jsonplaceholder.typicode.com/todos')
             .then((res) => {
                 this.props.dispatch(loadTodoItems(res.data.slice(0, 10)));
+                this.setState({
+                    isLoaded: true,
+                });
             })
             .catch((err) => console.log(err));
     };
@@ -19,17 +30,15 @@ class index extends Component {
     }
 
     render() {
+        const { isLoaded } = this.state;
+
         return (
             <div>
                 <AddTodo />
-                {console.log(this.props.todoItems)}
+                {isLoaded && <ToDoList />}
             </div>
         );
     }
 }
 
-export default connect((state) => {
-    return {
-        todoItems: state.userData.todoList,
-    };
-})(index);
+export default connect()(index);
