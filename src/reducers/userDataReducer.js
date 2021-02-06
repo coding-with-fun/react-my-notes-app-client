@@ -5,7 +5,13 @@ const initialState = {
 
 export const userDataReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "ADD_TODO":
+        case "LOAD_TODO":
+            return {
+                ...state,
+                todoList: action.payload.todoItems,
+            };
+        
+            case "ADD_TODO":
             return {
                 ...state,
                 todoList: [...state.todoList, action.payload.todoItem],
