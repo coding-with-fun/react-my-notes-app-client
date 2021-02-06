@@ -1,5 +1,5 @@
 export const switchTabs = () => {
     return {
-        type: "SWITCH_TABS",
+        type: 'SWITCH_TABS',
     };
 };

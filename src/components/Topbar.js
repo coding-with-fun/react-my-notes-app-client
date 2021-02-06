@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import { switchTabs } from "../actions/togglePageActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { switchTabs } from '../actions/togglePageActions';
 
 class Topbar extends Component {
     render() {
@@ -10,10 +10,10 @@ class Topbar extends Component {
                 <nav className="navbar navbar-light bg-light">
                     <div className="container-fluid">
                         <Link to="/" className="navbar-brand">
-                            My{" "}
-                            {this.props.currentTab === "notes"
-                                ? "Notes"
-                                : "ToDo"}
+                            My{' '}
+                            {this.props.currentTab === 'notes'
+                                ? 'Notes'
+                                : 'ToDo'}
                         </Link>
                         <div>
                             <Link
@@ -21,20 +21,19 @@ class Topbar extends Component {
                                 className="navbar-brand"
                                 onClick={() =>
                                     this.props.dispatch(switchTabs())
-                                }
-                            >
-                                {this.props.currentTab === "notes"
-                                    ? "ToDo"
-                                    : "Notes"}
+                                }>
+                                {this.props.currentTab === 'notes'
+                                    ? 'ToDo'
+                                    : 'Notes'}
                             </Link>
 
-                            {this.props.location.pathname !== "/about" ? (
-                                <Link className="navbar-brand" to={"/about"}>
+                            {this.props.location.pathname !== '/about' ? (
+                                <Link className="navbar-brand" to={'/about'}>
                                     About
                                 </Link>
                             ) : (
-                                this.props.location.pathname !== "/" && (
-                                    <Link className="navbar-brand" to={"/"}>
+                                this.props.location.pathname !== '/' && (
+                                    <Link className="navbar-brand" to={'/'}>
                                         Home
                                     </Link>
                                 )

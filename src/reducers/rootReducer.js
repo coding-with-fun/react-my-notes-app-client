@@ -1,6 +1,6 @@
-import { combineReducers } from "redux";
-import { userDataReducer } from "./userDataReducer";
-import { togglePageReducer } from "./togglePageReducer";
+import { combineReducers } from 'redux';
+import { userDataReducer } from './userDataReducer';
+import { togglePageReducer } from './togglePageReducer';
 
 const rootReducer = combineReducers({
     toggleTab: togglePageReducer,

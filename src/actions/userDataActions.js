@@ -1,6 +1,6 @@
 export const loadTodoItems = (todoItems) => {
     return {
-        type: "LOAD_TODO",
+        type: 'LOAD_TODO',
         payload: {
             todoItems,
         },
@@ -8,7 +8,7 @@ export const loadTodoItems = (todoItems) => {
 };
 export const addTodo = (todoItem) => {
     return {
-        type: "ADD_TODO",
+        type: 'ADD_TODO',
         payload: {
             todoItem,
         },

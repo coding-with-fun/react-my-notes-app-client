@@ -1,13 +1,13 @@
 const initialState = {
-    tab: "notes",
+    tab: 'notes',
 };
 
 export const togglePageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SWITCH_TABS":
+        case 'SWITCH_TABS':
             return {
                 ...state,
-                tab: state.tab === "notes" ? "todo" : "notes",
+                tab: state.tab === 'notes' ? 'todo' : 'notes',
             };
 
         default:
