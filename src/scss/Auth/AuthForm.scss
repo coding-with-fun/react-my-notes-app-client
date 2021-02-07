@@ -1,0 +1,30 @@
+.signin_form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .signin_form__container {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signin_button {
+        padding: 8px 35px;
+        background: var(--bs-primary);
+        color: var(--bs-white);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .signin_form {
+        .signin_form__container {
+            width: 100vw;
+        }
+    }
+}
