@@ -1,22 +1,10 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import About from './components/About';
-import Home from './components/Home';
-import Topbar from './components/Topbar';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Body from './Body';
 
 function App() {
     return (
         <Router>
-            <Topbar />
-
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-
-                <Route path="/about">
-                    <About />
-                </Route>
-            </Switch>
+            <Body />
         </Router>
     );
 }
