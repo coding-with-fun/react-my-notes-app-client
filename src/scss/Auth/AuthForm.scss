@@ -6,18 +6,33 @@
     justify-content: center;
 
     .signin_form__container {
-        width: 300px;
+        width: 320px;
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .alertText {
+            color: var(--bs-danger) !important;
+        }
+
+        .successText {
+            color: var(--bs-success) !important;
+        }
     }
 
     .signin_button {
-        padding: 8px 35px;
         background: var(--bs-primary);
         color: var(--bs-white);
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .signin_loading {
+        padding: 5px 47px;
+    }
+
+    .signin_success {
+        padding: 10.5px 38.43px;
     }
 }
 
