@@ -1,10 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import About from './components/About';
-import SignIn from './components/Auth/SignIn';
-import SignUp from './components/Auth/SignUp';
-import Home from './components/Home';
+import { Redirect } from 'react-router-dom';
 import Topbar from './components/Topbar';
 
 export class Body extends Component {
