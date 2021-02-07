@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Topbar from './components/Topbar';
+import AuthenticatedRoutes from './Routes/AuthenticatedRoutes';
+import UnauthenticatedRoutes from './Routes/UnauthenticatedRoutes';
 
 export class Body extends Component {
     render() {
@@ -12,11 +13,10 @@ export class Body extends Component {
                 {token ? (
                     <Fragment>
                         <Topbar />
+                        <AuthenticatedRoutes />
                     </Fragment>
                 ) : (
-                    <Fragment>
-                        <Redirect to="/signin" />
-                    </Fragment>
+                    <UnauthenticatedRoutes />
                 )}
             </div>
         );
