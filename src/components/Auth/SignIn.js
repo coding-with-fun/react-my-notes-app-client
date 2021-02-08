@@ -60,23 +60,13 @@ export class SignIn extends Component {
             }
         );
 
-        if (username.length > 3) {
+        if (e.target.name === 'username') {
             this.setState({
-                invalidUsername: false,
+                invalidUsername: e.target.value.length < 5,
             });
-        } else {
+        } else if (e.target.name === 'userPassword') {
             this.setState({
-                invalidUsername: true,
-            });
-        }
-
-        if (userPassword.length > 3) {
-            this.setState({
-                invalidPassword: false,
-            });
-        } else {
-            this.setState({
-                invalidPassword: true,
+                invalidPassword: e.target.value.length < 5,
             });
         }
     };
