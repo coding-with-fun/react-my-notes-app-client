@@ -13,7 +13,6 @@ export class SignIn extends Component {
             passwordHelpText: 'Password must be at least 5 characters long.',
             invalidPassword: true,
             loading: false,
-            isValid: false,
         };
     }
 
@@ -34,32 +33,22 @@ export class SignIn extends Component {
             .then((res) => {
                 console.log(res);
                 this.setState({
+                    invalidUsername: true,
+                    invalidPassword: true,
                     loading: false,
                 });
             })
             .catch((err) => {
-                console.log(err.response.data);
+                console.log(err.response.data.data);
                 this.setState({
+                    invalidUsername: true,
+                    invalidPassword: true,
                     loading: false,
                 });
             });
     };
 
     handleInput = (e) => {
-        const { username, userPassword } = this.state;
-        this.setState(
-            {
-                [e.target.name]: e.target.value,
-            },
-            () => {
-                if (username && userPassword) {
-                    this.setState({
-                        isValid: true,
-                    });
-                }
-            }
-        );
-
         if (e.target.name === 'username') {
             this.setState({
                 invalidUsername: e.target.value.length < 5,
@@ -69,6 +58,10 @@ export class SignIn extends Component {
                 invalidPassword: e.target.value.length < 5,
             });
         }
+
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
     };
 
     render() {
@@ -80,11 +73,28 @@ export class SignIn extends Component {
             passwordHelpText,
             invalidPassword,
             loading,
-            isValid,
         } = this.state;
 
         return (
             <div className="signin_form container">
+                <div className="toast-container">
+                    <div
+                        className="toast d-flex align-items-center toast_message"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true">
+                        <div class="toast-body">
+                            Hello, world! This is a toast message.
+                        </div>
+                        <button
+                            type="button"
+                            className="btn-close ms-auto me-2"
+                            data-bs-dismiss="toast"
+                            aria-label="Close"
+                        />
+                    </div>
+                </div>
+
                 <h1 className="mb-5">Sign In</h1>
 
                 <form className="row g-3 signin_form__container">
@@ -140,7 +150,7 @@ export class SignIn extends Component {
                         loading ? `signin_loading` : `signin_success`
                     }`}
                     onClick={() => this.handleUserSignIn()}
-                    disabled={!isValid}>
+                    disabled={invalidUsername || invalidPassword}>
                     {loading ? (
                         <div className="spinner-border" role="status">
                             <span className="visually-hidden">Loading...</span>

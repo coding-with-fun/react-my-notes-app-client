@@ -5,6 +5,16 @@
     align-items: center;
     justify-content: center;
 
+    .toast-container {
+        position: absolute;
+        top: 1vh;
+        right: 1vw;
+
+        .toast_message {
+            opacity: 1;
+        }
+    }
+
     .signin_form__container {
         width: 320px;
         display: flex;
