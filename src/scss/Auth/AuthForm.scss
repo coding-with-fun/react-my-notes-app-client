@@ -5,14 +5,10 @@
     align-items: center;
     justify-content: center;
 
-    .toast-container {
+    .auth_alert__container {
         position: absolute;
-        top: 1vh;
-        right: 1vw;
-
-        .toast_message {
-            opacity: 1;
-        }
+        top: 3vw;
+        width: 40vw;
     }
 
     .signin_form__container {

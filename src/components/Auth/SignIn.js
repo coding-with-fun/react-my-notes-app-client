@@ -9,9 +9,15 @@ export class SignIn extends Component {
             username: '',
             usernameHelpText: 'Username must be at least 5 characters long.',
             invalidUsername: true,
+
             userPassword: '',
             passwordHelpText: 'Password must be at least 5 characters long.',
             invalidPassword: true,
+
+            responseMessage: {
+                message: '',
+                status: null,
+            },
             loading: false,
         };
     }
@@ -32,19 +38,51 @@ export class SignIn extends Component {
         userSignIn(body)
             .then((res) => {
                 console.log(res);
-                this.setState({
-                    invalidUsername: true,
-                    invalidPassword: true,
-                    loading: false,
-                });
+                this.setState(
+                    {
+                        invalidUsername: true,
+                        invalidPassword: true,
+                        loading: false,
+                        responseMessage: {
+                            message: res.message,
+                            status: true,
+                        },
+                    },
+                    () => {
+                        setTimeout(() => {
+                            this.setState({
+                                responseMessage: {
+                                    message: '',
+                                    status: null,
+                                },
+                            });
+                        }, 5000);
+                    }
+                );
             })
             .catch((err) => {
                 console.log(err.response.data.data);
-                this.setState({
-                    invalidUsername: true,
-                    invalidPassword: true,
-                    loading: false,
-                });
+                this.setState(
+                    {
+                        invalidUsername: true,
+                        invalidPassword: true,
+                        loading: false,
+                        responseMessage: {
+                            message: err.response.data.data.message,
+                            status: false,
+                        },
+                    },
+                    () => {
+                        setTimeout(() => {
+                            this.setState({
+                                responseMessage: {
+                                    message: '',
+                                    status: null,
+                                },
+                            });
+                        }, 5000);
+                    }
+                );
             });
     };
 
@@ -61,6 +99,10 @@ export class SignIn extends Component {
 
         this.setState({
             [e.target.name]: e.target.value,
+            responseMessage: {
+                message: '',
+                status: null,
+            },
         });
     };
 
@@ -69,31 +111,32 @@ export class SignIn extends Component {
             username,
             usernameHelpText,
             invalidUsername,
+
             userPassword,
             passwordHelpText,
             invalidPassword,
+
+            responseMessage,
             loading,
         } = this.state;
 
         return (
             <div className="signin_form container">
-                <div className="toast-container">
+                {responseMessage.message && (
                     <div
-                        className="toast d-flex align-items-center toast_message"
+                        className={`auth_alert__container alert alert-${
+                            responseMessage.status ? `success` : `danger`
+                        } alert-dismissible fade show`}
                         role="alert"
-                        aria-live="assertive"
-                        aria-atomic="true">
-                        <div class="toast-body">
-                            Hello, world! This is a toast message.
-                        </div>
+                        data-bs->
+                        {responseMessage.message}
                         <button
                             type="button"
-                            className="btn-close ms-auto me-2"
-                            data-bs-dismiss="toast"
-                            aria-label="Close"
-                        />
+                            className="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                     </div>
-                </div>
+                )}
 
                 <h1 className="mb-5">Sign In</h1>
 
@@ -114,7 +157,7 @@ export class SignIn extends Component {
                         />
                         <small
                             id="usernameHelp"
-                            class={`form-text text-muted ${
+                            className={`form-text text-muted ${
                                 invalidUsername ? `alertText` : `successText`
                             }`}>
                             {usernameHelpText}
@@ -136,7 +179,7 @@ export class SignIn extends Component {
                         />
                         <small
                             id="passwordHelp"
-                            class={`form-text text-muted ${
+                            className={`form-text text-muted ${
                                 invalidPassword ? `alertText` : `successText`
                             }`}>
                             {passwordHelpText}
