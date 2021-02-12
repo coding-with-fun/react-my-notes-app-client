@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { userSignIn } from '../../api/auth.api';
 
 export class SignIn extends Component {
@@ -32,31 +33,20 @@ export class SignIn extends Component {
             username: '',
             userPassword: '',
             loading: true,
-            isValid: false,
         });
 
         userSignIn(body)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
+                localStorage.setItem('user_token', res.data.data.token);
                 this.setState(
                     {
-                        invalidUsername: true,
-                        invalidPassword: true,
+                        invalidUsername: false,
+                        invalidPassword: false,
                         loading: false,
-                        responseMessage: {
-                            message: res.message,
-                            status: true,
-                        },
                     },
                     () => {
-                        setTimeout(() => {
-                            this.setState({
-                                responseMessage: {
-                                    message: '',
-                                    status: null,
-                                },
-                            });
-                        }, 5000);
+                        this.handleRouting();
                     }
                 );
             })
@@ -106,6 +96,10 @@ export class SignIn extends Component {
         });
     };
 
+    handleRouting = () => {
+        this.props.history.push('/signup');
+    };
+
     render() {
         const {
             username,
@@ -126,15 +120,10 @@ export class SignIn extends Component {
                     <div
                         className={`auth_alert__container alert alert-${
                             responseMessage.status ? `success` : `danger`
-                        } alert-dismissible fade show`}
+                        }`}
                         role="alert"
                         data-bs->
                         {responseMessage.message}
-                        <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close"></button>
                     </div>
                 )}
 
@@ -159,13 +148,19 @@ export class SignIn extends Component {
                             id="usernameHelp"
                             className={`form-text text-muted ${
                                 invalidUsername ? `alertText` : `successText`
-                            }`}>
+                            }`}
+                            style={{
+                                opacity:
+                                    username.length > 0 && invalidUsername
+                                        ? 1
+                                        : 0,
+                            }}>
                             {usernameHelpText}
                         </small>
                     </div>
 
                     <div className="col">
-                        <label htmlFor="inputPassword" className="form-label">
+                        <label htmlFor="userPassword" className="form-label">
                             Password
                         </label>
                         <input
@@ -181,7 +176,13 @@ export class SignIn extends Component {
                             id="passwordHelp"
                             className={`form-text text-muted ${
                                 invalidPassword ? `alertText` : `successText`
-                            }`}>
+                            }`}
+                            style={{
+                                opacity:
+                                    userPassword.length > 0 && invalidPassword
+                                        ? 1
+                                        : 0,
+                            }}>
                             {passwordHelpText}
                         </small>
                     </div>
@@ -202,9 +203,14 @@ export class SignIn extends Component {
                         <span>Sign In</span>
                     )}
                 </button>
+
+                <div className="route_link__footer">
+                    Don't have an account?{' '}
+                    <span onClick={() => this.handleRouting()}>Sign Up</span>
+                </div>
             </div>
         );
     }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

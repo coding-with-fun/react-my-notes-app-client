@@ -40,6 +40,15 @@
     .signin_success {
         padding: 10.5px 38.43px;
     }
+
+    .route_link__footer {
+        margin-top: 30px;
+
+        span {
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
 }
 
 @media screen and (max-width: 350px) {
