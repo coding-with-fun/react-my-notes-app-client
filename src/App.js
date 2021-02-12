@@ -4,18 +4,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { setCurrentUser } from './actions/authenticationActions';
 import { Body } from './Body';
 
-function App({ token, dispatch }) {
+function App({ isAuthenticated, dispatch }) {
     const localToken = localStorage.getItem('user_token');
+
     useEffect(() => {
-        if (localToken) {
+        if (!isAuthenticated && localToken) {
             dispatch(setCurrentUser(localToken));
         }
         // eslint-disable-next-line
-    }, [localToken]);
+    }, [isAuthenticated, localToken]);
 
     return (
         <Router>
-            <Body token={token} />
+            <Body isAuthenticated={isAuthenticated} />
         </Router>
     );
 }
@@ -23,5 +24,6 @@ function App({ token, dispatch }) {
 export default connect((state) => {
     return {
         token: state.auth.token,
+        isAuthenticated: state.auth.isAuthenticated,
     };
 })(App);

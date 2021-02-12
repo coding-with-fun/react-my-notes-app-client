@@ -22,7 +22,7 @@ class index extends Component {
                     isLoaded: true,
                 });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
     };
 
     componentDidMount() {

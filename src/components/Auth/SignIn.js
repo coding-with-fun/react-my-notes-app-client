@@ -39,9 +39,6 @@ export class SignIn extends Component {
 
         userSignIn(body)
             .then((res) => {
-                console.log(res.data);
-                localStorage.setItem('user_token', res.data.data.token);
-                this.props.dispatch(setCurrentUser(res.data.data.token));
                 this.setState(
                     {
                         invalidUsername: false,
@@ -49,12 +46,16 @@ export class SignIn extends Component {
                         loading: false,
                     },
                     () => {
+                        localStorage.setItem('user_token', res.data.data.token);
+                        this.props.dispatch(
+                            setCurrentUser(res.data.data.token)
+                        );
                         this.props.history.push('/');
                     }
                 );
             })
             .catch((err) => {
-                console.log(err.response.data.data);
+                console.error(err.response.data.data);
                 this.setState(
                     {
                         invalidUsername: true,
@@ -145,6 +146,7 @@ export class SignIn extends Component {
                             value={username}
                             aria-describedby="usernameHelp"
                             onChange={(e) => this.handleInput(e)}
+                            autoComplete="username"
                             autoFocus
                         />
                         <small
@@ -174,6 +176,7 @@ export class SignIn extends Component {
                             value={userPassword}
                             aria-describedby="passwordHelp"
                             onChange={(e) => this.handleInput(e)}
+                            autoComplete="new-password"
                         />
                         <small
                             id="passwordHelp"

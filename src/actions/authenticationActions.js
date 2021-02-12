@@ -8,6 +8,7 @@ export const setCurrentUser = (token) => {
 };
 
 export const userSignOut = () => {
+    localStorage.removeItem('user_token');
     return {
         type: 'USER_SIGN_OUT',
     };

@@ -1,5 +1,6 @@
 const initialState = {
     token: '',
+    isAuthenticated: false,
 };
 
 export const authenticationReducer = (state = initialState, action) => {
@@ -8,12 +9,14 @@ export const authenticationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: action.payload.token,
+                isAuthenticated: true,
             };
 
         case 'USER_SIGN_OUT':
             return {
                 ...state,
                 token: '',
+                isAuthenticated: false,
             };
 
         default:

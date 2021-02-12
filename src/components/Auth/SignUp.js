@@ -55,7 +55,6 @@ export class SignUp extends Component {
 
         userSignUp(body)
             .then((res) => {
-                console.log(res);
                 this.setState(
                     {
                         invalidName: true,
@@ -81,7 +80,7 @@ export class SignUp extends Component {
                 );
             })
             .catch((err) => {
-                console.log(err.response.data.data);
+                console.error(err.response.data.data);
                 this.setState(
                     {
                         invalidName: true,
