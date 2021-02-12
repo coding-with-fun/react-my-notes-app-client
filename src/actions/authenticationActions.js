@@ -1,15 +1,6 @@
-export const userSignIn = (token) => {
+export const setCurrentUser = (token) => {
     return {
-        type: 'USER_SIGN_IN',
-        payload: {
-            token,
-        },
-    };
-};
-
-export const userSignUp = (token) => {
-    return {
-        type: 'USER_SIGN_UP',
+        type: 'SET_CURRENT_USER',
         payload: {
             token,
         },

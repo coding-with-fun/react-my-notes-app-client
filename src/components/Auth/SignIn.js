@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { userSignIn } from '../../api/auth.api';
+import { setCurrentUser } from '../../actions/authenticationActions';
 
 export class SignIn extends Component {
     constructor(props) {
@@ -39,6 +41,7 @@ export class SignIn extends Component {
             .then((res) => {
                 console.log(res.data);
                 localStorage.setItem('user_token', res.data.data.token);
+                this.props.dispatch(setCurrentUser(res.data.data.token));
                 this.setState(
                     {
                         invalidUsername: false,
@@ -46,7 +49,7 @@ export class SignIn extends Component {
                         loading: false,
                     },
                     () => {
-                        this.handleRouting();
+                        this.props.history.push('/');
                     }
                 );
             })
@@ -213,4 +216,4 @@ export class SignIn extends Component {
     }
 }
 
-export default withRouter(SignIn);
+export default connect()(withRouter(SignIn));

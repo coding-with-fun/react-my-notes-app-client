@@ -4,13 +4,7 @@ const initialState = {
 
 export const authenticationReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'USER_SIGN_IN':
-            return {
-                ...state,
-                token: action.payload.token,
-            };
-
-        case 'USER_SIGN_UP':
+        case 'SET_CURRENT_USER':
             return {
                 ...state,
                 token: action.payload.token,
