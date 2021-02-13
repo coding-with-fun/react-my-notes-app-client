@@ -10,38 +10,29 @@ class ToDoList extends Component {
         };
     }
 
-    componentDidMount() {
+    loadTodoList = () => {
         const todoList = this.props.todoList;
+        const tempCompletedList = [];
+        const tempUncompletedList = [];
+
         todoList.length > 0 &&
             todoList.map((todoItem) => {
                 if (todoItem.isCompleted) {
-                    this.setState((prevState) => {
-                        return {
-                            completedList: [
-                                ...prevState.completedList,
-                                {
-                                    title: todoItem.content,
-                                    id: todoItem._id,
-                                },
-                            ],
-                        };
-                    });
+                    tempCompletedList.push(todoItem);
                 } else {
-                    this.setState((prevState) => {
-                        return {
-                            uncompletedList: [
-                                ...prevState.uncompletedList,
-                                {
-                                    title: todoItem.content,
-                                    id: todoItem._id,
-                                },
-                            ],
-                        };
-                    });
+                    tempUncompletedList.push(todoItem);
                 }
-
                 return 1;
             });
+
+        this.setState({
+            completedList: tempCompletedList,
+            uncompletedList: tempUncompletedList,
+        });
+    };
+
+    componentDidMount() {
+        this.loadTodoList();
     }
 
     componentDidUpdate(prevProps) {
@@ -50,13 +41,7 @@ class ToDoList extends Component {
 
             this.setState((prevState) => {
                 return {
-                    uncompletedList: [
-                        ...prevState.uncompletedList,
-                        {
-                            title: item.content,
-                            id: item._id,
-                        },
-                    ],
+                    uncompletedList: [...prevState.uncompletedList, item],
                 };
             });
         }
@@ -72,7 +57,7 @@ class ToDoList extends Component {
                 </div>
                 {completedList.length > 0 &&
                     completedList.map((item) => {
-                        return <p key={item.id}>{item.title}</p>;
+                        return <p key={item._id}>{item.content}</p>;
                     })}
 
                 <div>
@@ -80,7 +65,7 @@ class ToDoList extends Component {
                 </div>
                 {uncompletedList.length > 0 &&
                     uncompletedList.map((item) => {
-                        return <p key={item.id}>{item.title}</p>;
+                        return <p key={item._id}>{item.content}</p>;
                     })}
             </div>
         );
