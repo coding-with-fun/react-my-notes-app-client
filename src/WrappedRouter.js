@@ -5,7 +5,12 @@ import Topbar from './components/Topbar';
 import AuthenticatedRoutes from './Routes/AuthenticatedRoutes';
 import UnauthenticatedRoutes from './Routes/UnauthenticatedRoutes';
 
-const WrappedRouter = ({ isAuthenticated, token, dispatch }) => {
+const WrappedRouter = ({
+    isAuthenticated,
+    token,
+    fetchingUserDetails,
+    dispatch,
+}) => {
     const handleFetchUserDetails = () => {
         token && dispatch(fetchUserDetails(token));
     };
@@ -17,16 +22,18 @@ const WrappedRouter = ({ isAuthenticated, token, dispatch }) => {
 
     return (
         <div>
-            <Fragment>
-                {isAuthenticated ? (
-                    <Fragment>
-                        <Topbar />
-                        <AuthenticatedRoutes />
-                    </Fragment>
-                ) : (
-                    <UnauthenticatedRoutes />
-                )}
-            </Fragment>
+            {!fetchingUserDetails && (
+                <Fragment>
+                    {isAuthenticated ? (
+                        <Fragment>
+                            <Topbar />
+                            <AuthenticatedRoutes />
+                        </Fragment>
+                    ) : (
+                        <UnauthenticatedRoutes />
+                    )}
+                </Fragment>
+            )}
         </div>
     );
 };
@@ -35,5 +42,6 @@ export default connect((state) => {
     return {
         token: state.auth.token,
         isAuthenticated: state.auth.isAuthenticated,
+        fetchingUserDetails: state.user.fetchingUserDetails,
     };
 })(WrappedRouter);

@@ -1,7 +1,15 @@
-const initialState = {};
+const initialState = {
+    fetchingUserDetails: false,
+};
 
 export const userProfileReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'LOADING_USER_DETAILS':
+            return {
+                ...state,
+                fetchingUserDetails: !state.fetchingUserDetails,
+            };
+
         case 'GET_USER_DETAILS':
             return {
                 ...state,

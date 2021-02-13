@@ -70,13 +70,17 @@ class ToDoList extends Component {
 
         return (
             <div className="container">
-                <b>Completed</b>
+                <div>
+                    <b>Completed</b>
+                </div>
                 {completedList.length > 0 &&
                     completedList.map((item) => {
                         return <p key={item.id}>{item.title}</p>;
                     })}
 
-                <b>Uncompleted</b>
+                <div>
+                    <b>Uncompleted</b>
+                </div>
                 {uncompletedList.length > 0 &&
                     uncompletedList.map((item) => {
                         return <p key={item.id}>{item.title}</p>;

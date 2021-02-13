@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadTodoItems } from '../../actions/userDataActions';
@@ -14,15 +13,10 @@ class index extends Component {
     }
 
     loadTodoItems = () => {
-        axios
-            .get('https://jsonplaceholder.typicode.com/todos')
-            .then((res) => {
-                this.props.dispatch(loadTodoItems(res.data.slice(0, 10)));
-                this.setState({
-                    isLoaded: true,
-                });
-            })
-            .catch((err) => console.error(err));
+        this.props.dispatch(loadTodoItems(this.props.userDetails));
+        this.setState({
+            isLoaded: true,
+        });
     };
 
     componentDidMount() {
@@ -41,4 +35,8 @@ class index extends Component {
     }
 }
 
-export default connect()(index);
+export default connect((state) => {
+    return {
+        userDetails: state.user,
+    };
+})(index);
