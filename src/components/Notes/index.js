@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class index extends Component {
+export class index extends Component {
     render() {
         return (
             <div>
@@ -9,3 +10,5 @@ export default class index extends Component {
         );
     }
 }
+
+export default connect()(index);

@@ -1,4 +1,5 @@
 const initialState = {
+    details: {},
     notesList: [],
     todoList: [],
 };

@@ -6,6 +6,7 @@ export const loadTodoItems = (todoItems) => {
         },
     };
 };
+
 export const addTodo = (todoItem) => {
     return {
         type: 'ADD_TODO',

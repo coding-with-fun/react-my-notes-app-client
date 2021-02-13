@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { setCurrentUser } from './actions/authenticationActions';
-import { Body } from './Body';
+import WrappedRouter from './WrappedRouter';
 
 function App({ isAuthenticated, dispatch }) {
     const localToken = localStorage.getItem('user_token');
@@ -16,7 +16,7 @@ function App({ isAuthenticated, dispatch }) {
 
     return (
         <Router>
-            <Body isAuthenticated={isAuthenticated} />
+            <WrappedRouter isAuthenticated={isAuthenticated} />
         </Router>
     );
 }
