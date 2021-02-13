@@ -1,3 +1,9 @@
+export const toggleToDoLoading = () => {
+    return {
+        type: 'TOGGLE_TODO_LOADING',
+    };
+};
+
 export const loadTodoItems = (todoItems) => {
     return {
         type: 'LOAD_TODO',

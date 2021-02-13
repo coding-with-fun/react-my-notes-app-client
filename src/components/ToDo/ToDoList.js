@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from '../../shared/Loader';
 import ToDoListItem from './ToDoListItem';
 
 class ToDoList extends Component {
@@ -49,10 +50,13 @@ class ToDoList extends Component {
     }
 
     render() {
+        const { loadingToDo } = this.props;
         const { completedList, uncompletedList, editToDo } = this.state;
 
         return (
             <div className="container">
+                {loadingToDo && <Loader />}
+
                 {completedList.length > 0 && (
                     <div className="card">
                         <div className="card-header">Completed</div>
@@ -94,5 +98,6 @@ class ToDoList extends Component {
 export default connect((state) => {
     return {
         todoList: state.userData.todoList,
+        loadingToDo: state.userData.loadingToDo,
     };
 })(ToDoList);
