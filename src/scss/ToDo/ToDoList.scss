@@ -1,0 +1,24 @@
+.todo_item__container {
+    display: flex;
+    justify-content: space-between;
+
+    .todo__operations {
+        opacity: 0;
+        transition: opacity 200ms linear;
+
+        .fas {
+            cursor: pointer;
+            margin-left: 25px;
+        }
+
+        .delete__todo {
+            color: var(--bs-danger);
+        }
+    }
+}
+
+.todo_item__container:hover {
+    .todo__operations {
+        opacity: 1;
+    }
+}

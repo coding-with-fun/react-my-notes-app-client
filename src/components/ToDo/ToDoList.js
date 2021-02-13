@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ToDoListItem from './ToDoListItem';
 
 class ToDoList extends Component {
     constructor(props) {
@@ -48,25 +49,43 @@ class ToDoList extends Component {
     }
 
     render() {
-        const { completedList, uncompletedList } = this.state;
+        const { completedList, uncompletedList, editToDo } = this.state;
 
         return (
             <div className="container">
-                <div>
-                    <b>Completed</b>
-                </div>
-                {completedList.length > 0 &&
-                    completedList.map((item) => {
-                        return <p key={item._id}>{item.content}</p>;
-                    })}
+                {completedList.length > 0 && (
+                    <div className="card">
+                        <div className="card-header">Completed</div>
+                        <ul className="list-group list-group-flush">
+                            {completedList.map((item) => {
+                                return (
+                                    <ToDoListItem
+                                        key={item._id}
+                                        item={item}
+                                        editToDo={editToDo}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    </div>
+                )}
 
-                <div>
-                    <b>Uncompleted</b>
-                </div>
-                {uncompletedList.length > 0 &&
-                    uncompletedList.map((item) => {
-                        return <p key={item._id}>{item.content}</p>;
-                    })}
+                {uncompletedList.length > 0 && (
+                    <div className="card">
+                        <div className="card-header">Uncompleted</div>
+                        <ul className="list-group list-group-flush">
+                            {uncompletedList.map((item) => {
+                                return (
+                                    <ToDoListItem
+                                        key={item._id}
+                                        item={item}
+                                        editToDo={editToDo}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    </div>
+                )}
             </div>
         );
     }
