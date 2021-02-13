@@ -15,3 +15,21 @@ export const addTodo = (todoItem) => {
         },
     };
 };
+
+export const loadNotesItems = (noteItems) => {
+    return {
+        type: 'LOAD_NOTE',
+        payload: {
+            noteItems,
+        },
+    };
+};
+
+export const addNote = (noteItem) => {
+    return {
+        type: 'ADD_NOTE',
+        payload: {
+            noteItem,
+        },
+    };
+};

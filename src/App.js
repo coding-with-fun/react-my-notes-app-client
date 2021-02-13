@@ -16,7 +16,7 @@ function App({ isAuthenticated, dispatch }) {
 
     return (
         <Router>
-            <WrappedRouter isAuthenticated={isAuthenticated} />
+            <WrappedRouter />
         </Router>
     );
 }

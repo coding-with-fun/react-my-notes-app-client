@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchUserDetails } from './actions/userProfileActions';
+import { handleGetUserDetails } from './actions/userProfileActions';
 import Topbar from './components/Topbar';
 import AuthenticatedRoutes from './Routes/AuthenticatedRoutes';
 import UnauthenticatedRoutes from './Routes/UnauthenticatedRoutes';
@@ -12,7 +12,7 @@ const WrappedRouter = ({
     dispatch,
 }) => {
     const handleFetchUserDetails = () => {
-        token && dispatch(fetchUserDetails(token));
+        token && dispatch(handleGetUserDetails(token));
     };
 
     useEffect(() => {
