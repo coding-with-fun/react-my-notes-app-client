@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-export class index extends Component {
+class index extends Component {
     render() {
         return (
             <div>

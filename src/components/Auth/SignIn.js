@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { userSignIn } from '../../api/auth.api';
 import { setCurrentUser } from '../../actions/authenticationActions';
 
-export class SignIn extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props);
 

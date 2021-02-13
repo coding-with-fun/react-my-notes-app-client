@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-export class ToDoList extends Component {
+class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {

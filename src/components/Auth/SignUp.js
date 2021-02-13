@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { userSignUp } from '../../api/auth.api';
 
-export class SignUp extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
 
