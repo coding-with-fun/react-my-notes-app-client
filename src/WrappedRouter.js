@@ -4,6 +4,7 @@ import { handleGetUserDetails } from './actions/userProfileActions';
 import Topbar from './components/Topbar';
 import AuthenticatedRoutes from './Routes/AuthenticatedRoutes';
 import UnauthenticatedRoutes from './Routes/UnauthenticatedRoutes';
+import Loader from './shared/Loader';
 
 const WrappedRouter = ({
     isAuthenticated,
@@ -22,7 +23,7 @@ const WrappedRouter = ({
 
     return (
         <div>
-            {!fetchingUserDetails && (
+            {!fetchingUserDetails ? (
                 <Fragment>
                     {isAuthenticated ? (
                         <Fragment>
@@ -33,6 +34,8 @@ const WrappedRouter = ({
                         <UnauthenticatedRoutes />
                     )}
                 </Fragment>
+            ) : (
+                <Loader />
             )}
         </div>
     );

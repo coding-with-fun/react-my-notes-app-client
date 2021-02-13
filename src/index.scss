@@ -6,3 +6,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.loader__screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
