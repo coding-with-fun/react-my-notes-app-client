@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../../actions/userDataActions';
+import { addToDo } from '../../api/todo.api';
 
-const AddTodoInput = ({ toggleInput, dispatch }) => {
+const AddTodoInput = ({ toggleInput, dispatch, token }) => {
     const [addTodoInputValue, setAddTodoInputValue] = useState('');
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = async (event) => {
         if (event.key === 'Enter') {
-            const body = {
-                userId: 1,
-                id: 20,
-                title: addTodoInputValue,
-                completed: false,
-            };
-            dispatch(addTodo(body));
+            const todoData = await addToDo(
+                {
+                    content: addTodoInputValue,
+                },
+                token
+            );
+            dispatch(addTodo(todoData.data.data.todoData));
             handleCloseInput();
         } else {
             setAddTodoInputValue(event.target.value);
@@ -45,4 +46,8 @@ const AddTodoInput = ({ toggleInput, dispatch }) => {
     );
 };
 
-export default connect()(AddTodoInput);
+export default connect((state) => {
+    return {
+        token: state.auth.token,
+    };
+})(AddTodoInput);

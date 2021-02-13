@@ -4,7 +4,6 @@ import { loadTodoItems, loadNotesItems } from './userDataActions';
 
 export const handleGetUserDetails = (token) => {
     return (dispatch) => {
-        dispatch(loadingGetUserDetails());
         getUserDetails(token)
             .then((res) => {
                 dispatch(fetchUserDetails(res.data.data.user));

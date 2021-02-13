@@ -14,14 +14,14 @@ class ToDoList extends Component {
         const todoList = this.props.todoList;
         todoList.length > 0 &&
             todoList.map((todoItem) => {
-                if (todoItem.completed) {
+                if (todoItem.isCompleted) {
                     this.setState((prevState) => {
                         return {
                             completedList: [
                                 ...prevState.completedList,
                                 {
-                                    title: todoItem.title,
-                                    id: todoItem.id,
+                                    title: todoItem.content,
+                                    id: todoItem._id,
                                 },
                             ],
                         };
@@ -32,8 +32,8 @@ class ToDoList extends Component {
                             uncompletedList: [
                                 ...prevState.uncompletedList,
                                 {
-                                    title: todoItem.title,
-                                    id: todoItem.id,
+                                    title: todoItem.content,
+                                    id: todoItem._id,
                                 },
                             ],
                         };
@@ -45,10 +45,7 @@ class ToDoList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (
-            prevProps.todoList !== this.props.todoList &&
-            prevProps.todoList.length < this.props.todoList.length
-        ) {
+        if (prevProps.todoList.length < this.props.todoList.length) {
             const item = this.props.todoList[this.props.todoList.length - 1];
 
             this.setState((prevState) => {
@@ -56,8 +53,8 @@ class ToDoList extends Component {
                     uncompletedList: [
                         ...prevState.uncompletedList,
                         {
-                            title: item.title,
-                            id: item.id,
+                            title: item.content,
+                            id: item._id,
                         },
                     ],
                 };

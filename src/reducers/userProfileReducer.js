@@ -1,5 +1,5 @@
 const initialState = {
-    fetchingUserDetails: false,
+    fetchingUserDetails: true,
 };
 
 export const userProfileReducer = (state = initialState, action) => {
