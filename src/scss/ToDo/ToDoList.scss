@@ -1,24 +1,45 @@
-.todo_item__container {
-    display: flex;
-    justify-content: space-between;
-
-    .todo__operations {
-        opacity: 0;
-        transition: opacity 200ms linear;
-
-        .fas {
-            cursor: pointer;
-            margin-left: 25px;
-        }
-
-        .delete__todo {
-            color: var(--bs-danger);
-        }
-    }
+.uncompleted_list__card {
+    margin-bottom: 5vh;
 }
 
-.todo_item__container:hover {
-    .todo__operations {
-        opacity: 1;
+.uncompleted_list__card,
+.completed_list__card {
+    .todo_list__container {
+        max-height: 30.8vh;
+        overflow: scroll;
+
+        .todo_item__container {
+            display: flex;
+            justify-content: space-between;
+
+            .todo_item__name {
+                display: flex;
+                align-items: center;
+
+                .todo_item__checkbox {
+                    margin-right: 20px;
+                }
+            }
+
+            .todo__operations {
+                opacity: 0;
+                transition: opacity 200ms linear;
+
+                .fas {
+                    cursor: pointer;
+                    margin-left: 25px;
+                }
+
+                .delete__todo {
+                    color: var(--bs-danger);
+                }
+            }
+        }
+
+        .todo_item__container:hover {
+            .todo__operations {
+                opacity: 1;
+            }
+        }
     }
 }

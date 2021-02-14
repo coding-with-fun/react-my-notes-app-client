@@ -51,23 +51,19 @@ class ToDoList extends Component {
 
     render() {
         const { loadingToDo } = this.props;
-        const { completedList, uncompletedList, editToDo } = this.state;
+        const { completedList, uncompletedList } = this.state;
 
         return (
             <div className="container">
                 {loadingToDo && <Loader />}
 
                 {completedList.length > 0 && (
-                    <div className="card">
+                    <div className="card uncompleted_list__card">
                         <div className="card-header">Completed</div>
-                        <ul className="list-group list-group-flush">
+                        <ul className="list-group list-group-flush todo_list__container">
                             {completedList.map((item) => {
                                 return (
-                                    <ToDoListItem
-                                        key={item._id}
-                                        item={item}
-                                        editToDo={editToDo}
-                                    />
+                                    <ToDoListItem key={item._id} item={item} />
                                 );
                             })}
                         </ul>
@@ -75,16 +71,12 @@ class ToDoList extends Component {
                 )}
 
                 {uncompletedList.length > 0 && (
-                    <div className="card">
+                    <div className="card completed_list__card">
                         <div className="card-header">Uncompleted</div>
-                        <ul className="list-group list-group-flush">
+                        <ul className="list-group list-group-flush todo_list__container">
                             {uncompletedList.map((item) => {
                                 return (
-                                    <ToDoListItem
-                                        key={item._id}
-                                        item={item}
-                                        editToDo={editToDo}
-                                    />
+                                    <ToDoListItem key={item._id} item={item} />
                                 );
                             })}
                         </ul>

@@ -22,7 +22,18 @@ class ToDoListItem extends Component {
 
         return (
             <li className="list-group-item todo_item__container">
-                {editToDo ? <span>Hello</span> : <span>{item.content}</span>}
+                <div className="todo_item__name">
+                    <input
+                        class="form-check-input mt-0 todo_item__checkbox"
+                        type="checkbox"
+                        value=""
+                    />
+                    {editToDo ? (
+                        <span>Hello</span>
+                    ) : (
+                        <span>{item.content}</span>
+                    )}
+                </div>
                 <span className="todo__operations">
                     <i
                         className="fas fa-edit edit__todo"
