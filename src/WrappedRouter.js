@@ -1,6 +1,9 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { handleGetUserDetails } from './actions/userProfileActions';
+import {
+    handleGetUserDetails,
+    loadingGetUserDetails,
+} from './actions/userProfileActions';
 import Topbar from './components/Topbar';
 import AuthenticatedRoutes from './Routes/AuthenticatedRoutes';
 import UnauthenticatedRoutes from './Routes/UnauthenticatedRoutes';
@@ -17,7 +20,9 @@ const WrappedRouter = ({
     };
 
     useEffect(() => {
-        token && handleFetchUserDetails();
+        token
+            ? handleFetchUserDetails()
+            : dispatch(loadingGetUserDetails(false));
         // eslint-disable-next-line
     }, [token]);
 

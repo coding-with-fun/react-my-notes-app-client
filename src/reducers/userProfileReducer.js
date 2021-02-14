@@ -1,5 +1,5 @@
 const initialState = {
-    fetchingUserDetails: false,
+    fetchingUserDetails: true,
 };
 
 export const userProfileReducer = (state = initialState, action) => {
@@ -7,7 +7,7 @@ export const userProfileReducer = (state = initialState, action) => {
         case 'LOADING_USER_DETAILS':
             return {
                 ...state,
-                fetchingUserDetails: !state.fetchingUserDetails,
+                fetchingUserDetails: action.payload.state,
             };
 
         case 'GET_USER_DETAILS':

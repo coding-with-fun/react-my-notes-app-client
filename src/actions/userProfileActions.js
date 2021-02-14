@@ -4,25 +4,27 @@ import { handleLoadTodo, loadNotesItems } from './userDataActions';
 
 export const handleGetUserDetails = (token) => {
     return (dispatch) => {
-        dispatch(loadingGetUserDetails());
+        dispatch(loadingGetUserDetails(true));
         getUserDetails(token)
             .then((res) => {
-                console.log('object');
                 dispatch(fetchUserDetails(res.data.data.user));
                 dispatch(handleLoadTodo(res.data.data.user.todoList));
                 dispatch(loadNotesItems(res.data.data.user.noteList));
-                dispatch(loadingGetUserDetails());
+                dispatch(loadingGetUserDetails(false));
             })
             .catch(() => {
                 dispatch(userSignOut());
-                dispatch(loadingGetUserDetails());
+                dispatch(loadingGetUserDetails(false));
             });
     };
 };
 
-export const loadingGetUserDetails = () => {
+export const loadingGetUserDetails = (state) => {
     return {
         type: 'LOADING_USER_DETAILS',
+        payload: {
+            state,
+        },
     };
 };
 

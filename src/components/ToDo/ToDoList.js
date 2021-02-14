@@ -14,7 +14,6 @@ class ToDoList extends Component {
     }
 
     loadTodoList = () => {
-        console.log('object');
         const { uncompletedTodoList, completedTodoList } = this.props;
 
         this.setState({
@@ -26,7 +25,6 @@ class ToDoList extends Component {
     handleToggleToDo = async (index) => {
         const { todoList, dispatch } = this.props;
         todoList[index].isCompleted = !todoList[index].isCompleted;
-        console.log(todoList[index]);
 
         await dispatch(handleToggleTodo(todoList));
         this.loadTodoList();
