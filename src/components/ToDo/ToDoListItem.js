@@ -27,7 +27,8 @@ class ToDoListItem extends Component {
                         className="form-check-input mt-0 todo_item__checkbox"
                         type="checkbox"
                         value=""
-                        onChange={() => handleToggleToDo(index)}
+                        checked={item.isCompleted}
+                        onChange={(e) => handleToggleToDo(e, index)}
                     />
                     {editToDo ? (
                         <span>Hello</span>
@@ -38,7 +39,9 @@ class ToDoListItem extends Component {
                 <span className="todo__operations">
                     <i
                         className="fas fa-edit edit__todo"
-                        onClick={() => this.handleToggleEditToDo()}></i>
+                        onClick={(e) =>
+                            this.handleToggleEditToDo(e, index)
+                        }></i>
                     <i className="fas fa-trash delete__todo"></i>
                 </span>
             </li>

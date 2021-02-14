@@ -15,7 +15,7 @@ export function addToDo(body) {
     return data;
 }
 
-export function toggleToDo(id, body) {
-    const data = axios.put(UPDATE_TODO + `/id=${id}`, body, headerConfig);
+export function updateToDo(id, body) {
+    const data = axios.put(UPDATE_TODO + `?id=${id}`, body, headerConfig);
     return data;
 }

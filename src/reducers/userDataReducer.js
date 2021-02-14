@@ -24,13 +24,10 @@ export const userDataReducer = (state = initialState, action) => {
         case 'ADD_TODO':
             return {
                 ...state,
-                todoList: [...state.todoList, action.payload.todoItem],
-            };
-
-        case 'TOGGLE_TODO':
-            return {
-                ...state,
-                todoList: action.payload.todoList,
+                uncompletedTodoList: [
+                    ...state.uncompletedTodoList,
+                    action.payload.todoItem,
+                ],
             };
 
         case 'TOGGLE_NOTES_LOADING':

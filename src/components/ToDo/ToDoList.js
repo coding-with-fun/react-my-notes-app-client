@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleToggleTodo } from '../../actions/userDataActions';
+import {
+    handleToggleTodo,
+    handleUpdateTodo,
+} from '../../actions/userDataActions';
 import Loader from '../../shared/Loader';
 import ToDoListItem from './ToDoListItem';
 
@@ -22,11 +25,25 @@ class ToDoList extends Component {
         });
     };
 
-    handleToggleToDo = async (index) => {
-        const { todoList, dispatch } = this.props;
-        todoList[index].isCompleted = !todoList[index].isCompleted;
+    handleToggleToDo = async (e, index) => {
+        const { dispatch } = this.props;
+        const { uncompletedList, completedList } = this.state;
 
-        await dispatch(handleToggleTodo(todoList));
+        if (e.target.checked) {
+            const item = uncompletedList[index];
+            item.isCompleted = true;
+            completedList.push(item);
+            uncompletedList.splice(index, 1);
+            await dispatch(handleUpdateTodo(item._id, item));
+        } else {
+            const item = completedList[index];
+            item.isCompleted = false;
+            uncompletedList.push(item);
+            completedList.splice(index, 1);
+            await dispatch(handleUpdateTodo(item._id, item));
+        }
+
+        await dispatch(handleToggleTodo(uncompletedList, completedList));
         this.loadTodoList();
     };
 
@@ -35,13 +52,17 @@ class ToDoList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.todoList.length < this.props.todoList.length) {
-            const item = this.props.todoList[this.props.todoList.length - 1];
+        const { uncompletedTodoList, completedTodoList } = this.props;
 
-            this.setState((prevState) => {
-                return {
-                    uncompletedList: [...prevState.uncompletedList, item],
-                };
+        if (uncompletedTodoList !== prevProps.uncompletedTodoList) {
+            this.setState({
+                uncompletedList: uncompletedTodoList,
+            });
+        }
+
+        if (completedTodoList !== prevProps.completedTodoList) {
+            this.setState({
+                completedList: completedTodoList,
             });
         }
     }
@@ -96,7 +117,6 @@ class ToDoList extends Component {
 
 export default connect((state) => {
     return {
-        todoList: state.userData.todoList,
         completedTodoList: state.userData.completedTodoList,
         uncompletedTodoList: state.userData.uncompletedTodoList,
     };

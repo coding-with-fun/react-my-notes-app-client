@@ -1,7 +1,17 @@
-export const handleToggleTodo = (todoList) => {
+import { updateToDo } from '../api/todo.api';
+
+export const handleToggleTodo = (tempUncompletedList, tempCompletedList) => {
     return (dispatch) => {
         dispatch(toggleTodoLoading());
-        dispatch(toggleTodo(todoList));
+        dispatch(loadTodoItems(tempUncompletedList, tempCompletedList));
+        dispatch(toggleTodoLoading());
+    };
+};
+
+export const handleUpdateTodo = (id, body) => {
+    return async (dispatch) => {
+        dispatch(toggleTodoLoading());
+        await updateToDo(id, body);
         dispatch(toggleTodoLoading());
     };
 };
@@ -46,15 +56,6 @@ export const addTodo = (todoItem) => {
         type: 'ADD_TODO',
         payload: {
             todoItem,
-        },
-    };
-};
-
-export const toggleTodo = (todoList) => {
-    return {
-        type: 'TOGGLE_TODO',
-        payload: {
-            todoList,
         },
     };
 };
