@@ -2,7 +2,8 @@ const initialState = {
     loadingNotes: false,
     notesList: [],
     loadingToDo: false,
-    todoList: [],
+    completedTodoList: [],
+    uncompletedTodoList: [],
 };
 
 export const userDataReducer = (state = initialState, action) => {
@@ -16,7 +17,8 @@ export const userDataReducer = (state = initialState, action) => {
         case 'LOAD_TODO':
             return {
                 ...state,
-                todoList: action.payload.todoItems,
+                completedTodoList: action.payload.completedTodoList,
+                uncompletedTodoList: action.payload.uncompletedTodoList,
             };
 
         case 'ADD_TODO':

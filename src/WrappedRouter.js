@@ -13,11 +13,11 @@ const WrappedRouter = ({
     dispatch,
 }) => {
     const handleFetchUserDetails = () => {
-        token && dispatch(handleGetUserDetails());
+        dispatch(handleGetUserDetails(token));
     };
 
     useEffect(() => {
-        handleFetchUserDetails();
+        token && handleFetchUserDetails();
         // eslint-disable-next-line
     }, [token]);
 

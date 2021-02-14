@@ -6,17 +6,37 @@ export const handleToggleTodo = (todoList) => {
     };
 };
 
+export const handleLoadTodo = (todoList) => {
+    const tempCompletedList = [];
+    const tempUncompletedList = [];
+
+    todoList.length > 0 &&
+        todoList.map((todoItem) => {
+            if (todoItem.isCompleted) {
+                tempCompletedList.push(todoItem);
+            } else {
+                tempUncompletedList.push(todoItem);
+            }
+            return 1;
+        });
+
+    return (dispatch) => {
+        dispatch(loadTodoItems(tempUncompletedList, tempCompletedList));
+    };
+};
+
 export const toggleTodoLoading = () => {
     return {
         type: 'TOGGLE_TODO_LOADING',
     };
 };
 
-export const loadTodoItems = (todoItems) => {
+export const loadTodoItems = (tempUncompletedList, tempCompletedList) => {
     return {
         type: 'LOAD_TODO',
         payload: {
-            todoItems,
+            uncompletedTodoList: tempUncompletedList,
+            completedTodoList: tempCompletedList,
         },
     };
 };

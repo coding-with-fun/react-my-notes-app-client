@@ -1,13 +1,15 @@
 import { getUserDetails } from '../api/user.api';
 import { userSignOut } from './authenticationActions';
-import { loadTodoItems, loadNotesItems } from './userDataActions';
+import { handleLoadTodo, loadNotesItems } from './userDataActions';
 
-export const handleGetUserDetails = () => {
+export const handleGetUserDetails = (token) => {
     return (dispatch) => {
-        getUserDetails()
+        dispatch(loadingGetUserDetails());
+        getUserDetails(token)
             .then((res) => {
+                console.log('object');
                 dispatch(fetchUserDetails(res.data.data.user));
-                dispatch(loadTodoItems(res.data.data.user.todoList));
+                dispatch(handleLoadTodo(res.data.data.user.todoList));
                 dispatch(loadNotesItems(res.data.data.user.noteList));
                 dispatch(loadingGetUserDetails());
             })

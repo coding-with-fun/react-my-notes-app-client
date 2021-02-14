@@ -15,23 +15,11 @@ class ToDoList extends Component {
 
     loadTodoList = () => {
         console.log('object');
-        const todoList = this.props.todoList;
-        const tempCompletedList = [];
-        const tempUncompletedList = [];
-
-        todoList.length > 0 &&
-            todoList.map((todoItem) => {
-                if (todoItem.isCompleted) {
-                    tempCompletedList.push(todoItem);
-                } else {
-                    tempUncompletedList.push(todoItem);
-                }
-                return 1;
-            });
+        const { uncompletedTodoList, completedTodoList } = this.props;
 
         this.setState({
-            completedList: tempCompletedList,
-            uncompletedList: tempUncompletedList,
+            completedList: completedTodoList,
+            uncompletedList: uncompletedTodoList,
         });
     };
 
@@ -111,6 +99,7 @@ class ToDoList extends Component {
 export default connect((state) => {
     return {
         todoList: state.userData.todoList,
-        loadingToDo: state.userData.loadingToDo,
+        completedTodoList: state.userData.completedTodoList,
+        uncompletedTodoList: state.userData.uncompletedTodoList,
     };
 })(ToDoList);
