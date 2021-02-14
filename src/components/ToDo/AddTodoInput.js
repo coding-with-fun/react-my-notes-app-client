@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTodo, toggleToDoLoading } from '../../actions/userDataActions';
+import { addTodo, toggleTodoLoading } from '../../actions/userDataActions';
 import { addToDo } from '../../api/todo.api';
 
 const AddTodoInput = ({ toggleInput, dispatch, token }) => {
@@ -8,7 +8,7 @@ const AddTodoInput = ({ toggleInput, dispatch, token }) => {
 
     const handleKeyPress = async (event) => {
         if (event.key === 'Enter') {
-            dispatch(toggleToDoLoading());
+            dispatch(toggleTodoLoading());
             handleCloseInput();
             const todoData = await addToDo(
                 {
@@ -17,7 +17,7 @@ const AddTodoInput = ({ toggleInput, dispatch, token }) => {
                 token
             );
             dispatch(addTodo(todoData.data.data.todoData));
-            dispatch(toggleToDoLoading());
+            dispatch(toggleTodoLoading());
         } else {
             setAddTodoInputValue(event.target.value);
         }

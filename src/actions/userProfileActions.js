@@ -2,9 +2,9 @@ import { getUserDetails } from '../api/user.api';
 import { userSignOut } from './authenticationActions';
 import { loadTodoItems, loadNotesItems } from './userDataActions';
 
-export const handleGetUserDetails = (token) => {
+export const handleGetUserDetails = () => {
     return (dispatch) => {
-        getUserDetails(token)
+        getUserDetails()
             .then((res) => {
                 dispatch(fetchUserDetails(res.data.data.user));
                 dispatch(loadTodoItems(res.data.data.user.todoList));

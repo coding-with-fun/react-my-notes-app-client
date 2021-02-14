@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleToggleTodo } from '../../actions/userDataActions';
 import Loader from '../../shared/Loader';
 import ToDoListItem from './ToDoListItem';
 
@@ -13,6 +14,7 @@ class ToDoList extends Component {
     }
 
     loadTodoList = () => {
+        console.log('object');
         const todoList = this.props.todoList;
         const tempCompletedList = [];
         const tempUncompletedList = [];
@@ -31,6 +33,15 @@ class ToDoList extends Component {
             completedList: tempCompletedList,
             uncompletedList: tempUncompletedList,
         });
+    };
+
+    handleToggleToDo = async (index) => {
+        const { todoList, dispatch } = this.props;
+        todoList[index].isCompleted = !todoList[index].isCompleted;
+        console.log(todoList[index]);
+
+        await dispatch(handleToggleTodo(todoList));
+        this.loadTodoList();
     };
 
     componentDidMount() {
@@ -61,9 +72,14 @@ class ToDoList extends Component {
                     <div className="card uncompleted_list__card">
                         <div className="card-header">Completed</div>
                         <ul className="list-group list-group-flush todo_list__container">
-                            {completedList.map((item) => {
+                            {completedList.map((item, index) => {
                                 return (
-                                    <ToDoListItem key={item._id} item={item} />
+                                    <ToDoListItem
+                                        key={item._id}
+                                        item={item}
+                                        index={index}
+                                        handleToggleToDo={this.handleToggleToDo}
+                                    />
                                 );
                             })}
                         </ul>
@@ -74,9 +90,14 @@ class ToDoList extends Component {
                     <div className="card completed_list__card">
                         <div className="card-header">Uncompleted</div>
                         <ul className="list-group list-group-flush todo_list__container">
-                            {uncompletedList.map((item) => {
+                            {uncompletedList.map((item, index) => {
                                 return (
-                                    <ToDoListItem key={item._id} item={item} />
+                                    <ToDoListItem
+                                        key={item._id}
+                                        item={item}
+                                        index={index}
+                                        handleToggleToDo={this.handleToggleToDo}
+                                    />
                                 );
                             })}
                         </ul>

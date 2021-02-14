@@ -17,16 +17,17 @@ class ToDoListItem extends Component {
     };
 
     render() {
-        const { item } = this.props;
+        const { item, index, handleToggleToDo } = this.props;
         const { editToDo } = this.state;
 
         return (
             <li className="list-group-item todo_item__container">
                 <div className="todo_item__name">
                     <input
-                        class="form-check-input mt-0 todo_item__checkbox"
+                        className="form-check-input mt-0 todo_item__checkbox"
                         type="checkbox"
                         value=""
+                        onChange={() => handleToggleToDo(index)}
                     />
                     {editToDo ? (
                         <span>Hello</span>

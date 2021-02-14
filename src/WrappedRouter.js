@@ -13,7 +13,7 @@ const WrappedRouter = ({
     dispatch,
 }) => {
     const handleFetchUserDetails = () => {
-        token && dispatch(handleGetUserDetails(token));
+        token && dispatch(handleGetUserDetails());
     };
 
     useEffect(() => {

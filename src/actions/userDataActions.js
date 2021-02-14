@@ -1,4 +1,12 @@
-export const toggleToDoLoading = () => {
+export const handleToggleTodo = (todoList) => {
+    return (dispatch) => {
+        dispatch(toggleTodoLoading());
+        dispatch(toggleTodo(todoList));
+        dispatch(toggleTodoLoading());
+    };
+};
+
+export const toggleTodoLoading = () => {
     return {
         type: 'TOGGLE_TODO_LOADING',
     };
@@ -18,6 +26,15 @@ export const addTodo = (todoItem) => {
         type: 'ADD_TODO',
         payload: {
             todoItem,
+        },
+    };
+};
+
+export const toggleTodo = (todoList) => {
+    return {
+        type: 'TOGGLE_TODO',
+        payload: {
+            todoList,
         },
     };
 };

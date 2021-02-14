@@ -25,6 +25,12 @@ export const userDataReducer = (state = initialState, action) => {
                 todoList: [...state.todoList, action.payload.todoItem],
             };
 
+        case 'TOGGLE_TODO':
+            return {
+                ...state,
+                todoList: action.payload.todoList,
+            };
+
         case 'TOGGLE_NOTES_LOADING':
             return {
                 ...state,
